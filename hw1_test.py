@@ -30,7 +30,7 @@ ds,fs = hwutils.walk(repo)
 flist = ['README.md']
 if hwutils.checkFiles(repo,flist):
     # Test to see if the last line of the file is
-    helloworld = "Hellow Git World!"
+    helloworld = "Hello Git World!"
     readme=os.path.join(repo,'README.md')
     with open(readme) as f:
         for line in f:
