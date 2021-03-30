@@ -3,10 +3,7 @@ import logging
 import subprocess
 import glob
 
-# Notebook
-import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
-from IPython.display import Image, display
+
 
 def walk(path):
     fs = []
@@ -91,101 +88,5 @@ def checkDir(repo,d):
     return test
                  
     
-    
-
-def dispImage(repo,fname):
-    path=os.path.join(repo,fname)
-    logging.info("Display image file <%s>"%path) 
-    if not os.path.exists(path):
-        logging.error("<%s> does not exist!"%path)
-    else:
-        display(Image(filename=path))
-
-def dispImageList(repo,flist):
-    for ff in flist:
-        dispImage(repo,ff)
-
-def images2pdf(repo,ilist,outpdf):
-    logging.info("Attempting to assemble a PDF from the following list of images")
-    logging.info(str(ilist))
-    if len(ilist) == 0:
-        logging.error("List appears empty!")
-        return
-    tmpdir = os.path.join(repo,'tmp')
-    tmpdir = '/home/bsb/tmp'
-    tmpdir = './tmp'
-    if not os.path.isdir(tmpdir):
-        os.mkdir(tmpdir)
-    # make sure it is empty
-    tlist = glob.glob(os.path.join(tmpdir,"*.*"))
-    for f in tlist:
-        os.remove(f)
-    
-    # Store all the rare file names
-    tmpfiles = []
-
-    for i in ilist:
-        # full filename
-        path = os.path.join(repo,i)
-
-        # create output file name
-        base = os.path.basename(i)
-        nm,ext = os.path.splitext(base)
-
-
-        # Does the file exist?
-        test = os.path.isfile(path)
-        logging.debug("Does %s exist? %s"%(path,str(test)))
-        if test:
-            ifile = path
-            caption = i
-            ofile = os.path.join(tmpdir,"%s_rare%s"%(nm,ext))
-
-            # If it is an SVG, convert to PNG
-            if "svg" in ext.lower():
-                # Convert to png
-                pngf = os.path.join(tmpdir,"%s.png"%nm)
-                logging.debug("Use inkscape to convert <%s> to <%s>"%(path,pngf))
-                cmd="inkscape -z -f %s -w 720 -e %s"%(path,pngf)
-                logging.debug("CMD: %s"%cmd)
-                p = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
-                (output,err)=p.communicate()
-                if output is not None:
-                    logging.debug("stdout: %s"%output)
-                if err is not None:
-                    logging.error("stderr: %s"%err)
-                    i = pngf
-                path = os.path.join(repo,i)
-                ifile = path
-                ofile = os.path.join(tmpdir,"%s_rare.png"%(nm))
-                
-
-        else:
-            ifile = 'missing.png'
-            caption = i
-            ofile = os.path.join(tmpdir,"%s_rare%s"%(nm,'.png'))
-            
-        cmd = 'bash add_caption.sh %s %s "%s"'%(ifile,ofile,caption)
-        tmpfiles.append(ofile)
-        logging.debug("CMD: %s"%cmd)
-        p = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
-        (output,err)=p.communicate()
-        if output is not None:
-            logging.debug("stdout: %s"%output)
-        if err is not None:
-            logging.error("stderr: %s"%err)
-
-    # Now put all images togeter into a pdf
-    cmd = 'convert '
-    for t in tmpfiles:
-        cmd = cmd + t + " "
-    cmd = cmd + " " + outpdf
-    logging.debug("CMD: %s"%cmd)
-    p = subprocess.Popen(cmd,stdout=subprocess.PIPE,shell=True)
-    (output,err)=p.communicate()
-    if output is not None:
-        logging.debug("stdout: %s"%output)
-    if err is not None:
-        logging.error("stderr: %s"%err)
     
 
