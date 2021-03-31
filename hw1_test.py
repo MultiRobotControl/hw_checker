@@ -53,7 +53,7 @@ if testcnt==testN:
     logging.info("PASSED!  All %d of %d tests passed"%(testcnt, testN))
     sys.exit(0)
 else:
-    logging.warn("FAILED: Anly %d of %d tests passed"%(testcnt, testN))
+    logging.warn("FAILED: Only %d of %d tests passed"%(testcnt, testN))
     sys.exit(1)
 
 
