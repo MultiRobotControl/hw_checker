@@ -31,7 +31,7 @@ logger.addHandler(console)
 
 logging.info("Contents of repository:")
 ds,fs = hwutils.walk(repo)
-
+hwutils.callCmd('tree %s'%repo)
 
 # Test 1
 logging.info("## Exercise 1: Creating Directories and Files on the Command Line ##")
