@@ -20,7 +20,7 @@ console.setLevel(logging.INFO)
 console.setFormatter(formatter)
 logger.addHandler(console)
 
-repo='../ay21_hw1'
+repo='../ay22_hw1'
 testN = 1
 testcnt = 0
 
