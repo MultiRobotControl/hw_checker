@@ -10,7 +10,7 @@ reload(hwutils)
 # For local testing
 # For github testing
 repo='../ay22_hw2'
-
+repo='..'
 # Number o tests
 testN = 4
 # Test success coutner
