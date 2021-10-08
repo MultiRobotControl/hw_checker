@@ -9,7 +9,7 @@ reload(hwutils)
 
 # For local testing
 # For github testing
-repo='../ay22_hw'
+repo='../hw'
 
 # Number o tests
 testN = 4
