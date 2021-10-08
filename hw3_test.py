@@ -35,7 +35,7 @@ hwutils.callCmd('tree %s'%repo)
 
 # Test 1
 logging.info("## Exercise 1: Make a ROS Package in Your Git Repository ##")
-flist = ['CMakeLists.txt','package.xml','ex1.txt'],
+flist = ['CMakeLists.txt', 'package.xml', 'ex1.txt']
 if hwutils.checkFiles(repo,flist):
     testCnt += 1
 else:
