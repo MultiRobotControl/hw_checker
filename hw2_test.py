@@ -11,7 +11,7 @@ reload(hwutils)
 # For github testing
 repo='../hw'
 
-# Number o tests
+# Number of tests
 testN = 4
 # Test success coutner
 testCnt = 0

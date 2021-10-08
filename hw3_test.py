@@ -11,8 +11,8 @@ reload(hwutils)
 # For github testing
 repo='../hw'
 
-# Number o tests
-testN = 4
+# Number of tests
+testN = 5
 # Test success coutner
 testCnt = 0
 
@@ -34,45 +34,53 @@ ds,fs = hwutils.walk(repo)
 hwutils.callCmd('tree %s'%repo)
 
 # Test 1
-logging.info("## Exercise 1: Creating Directories and Files on the Command Line ##")
-flist = ['sandbox','sandbox/dir1','sandbox/dir1/file1.txt',
-         'sandbox/dir2','sandbox/dir2/file2.txt','sandbox/commands.txt']
+logging.info("## Exercise 1: Make a ROS Package in Your Git Repository ##")
+flist = ['CMakeLists.txt','package.xml','ex1.txt'],
 if hwutils.checkFiles(repo,flist):
     testCnt += 1
 else:
     pass
-hwutils.catFiles(repo,['sandbox/commands.txt']);
+hwutils.catFiles(repo,['ex1.txt']);
 
 
 # Test 2
-logging.info("## Exercise 2: Copying, Moving and Editing ##")
-flist = ['playpen','playpen/folder1','playpen/folder1/file1.txt',
-         'playpen/folder2','playpen/folder2/file2.txt','playpen/play.txt']
+logging.info("## Exercise 2: Using `rospack` ##")
+flist = ['ex2.txt']
 if hwutils.checkFiles(repo,flist):
     testCnt += 1
 else:
     pass
-hwutils.catFiles(repo,['playpen/play.txt']);
+hwutils.catFiles(repo,flist);
 
 # Test 3
-logging.info("## Exercise 3: Using Tree and Redirection ##")
-flist = ['tree.out']
+logging.info("## Exercise 3: Driving a Turtle, One Letter ##")
+flist = ['scripts/turtleletter.sh',
+         'images/turtleletter.png']
 if hwutils.checkFiles(repo,flist):
     testCnt += 1
 else:
     pass
 
-hwutils.catFiles(repo,['tree.out']);
+hwutils.catFiles(repo,['scripts/turtleletter.sh'])
 
 
 # Test 4
-logging.info("## Exercise 5: ROS Graph ##")
-flist = ['images/rosgraph_turtlesim.png']
+logging.info("## Exercise 4:  Turtle Services, Two Letters ##")
+flist = ['scripts/turtleletterstwo.sh',
+         'images/turtleletterstwo.png']
 if hwutils.checkFiles(repo,flist):
     testCnt += 1
 else:
     pass
 
+# Test 5
+logging.info("## Exercise 5: Gazebo Demo ##")
+flist = ['launch/YOUROBOT.launch',
+         'worlds/YOUROBOT.world']
+if hwutils.checkFiles(repo,flist):
+    testCnt += 1
+else:
+    pass
 
 # Summary
 logging.info("Automated Test Summary:")
